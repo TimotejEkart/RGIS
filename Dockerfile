@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 
 # delovni direktorij v sliki
 
@@ -16,13 +16,14 @@ EXPOSE 443
 
 # slika, ki jo uporabimo za izgradnjo
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 WORKDIR /src
 
 # kopiranje datotek v delovni direktorij
 
-COPY ["vaja4/RGIS_Vaja4/RGIS_Vaja4/RGIS_Vaja4.csproj", "RGIS_Vaja4/"]
+COPY ["RGIS_Vaja4/RGIS_Vaja4.csproj", "RGIS_Vaja4/"]
+
 
 
 # zagon ukaza za obnovo vseh odvisnosti
