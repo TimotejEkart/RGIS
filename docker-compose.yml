@@ -2,13 +2,13 @@ version: '3.8'
 services:
   app:
     image: timotejekart/rgisvaja6:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=Izleti;User=sa;Password=Rgis;
     depends_on:
       - db
     ports:
       - "7017:80"
-    environment:
-      - ConnectionStrings__DefaultConnection=Server=db;Database=Izleti;User=sa;Password=Rgis;
-
   db:
     image: mcr.microsoft.com/mssql/server
     environment:
