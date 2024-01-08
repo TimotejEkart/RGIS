@@ -4,6 +4,10 @@ on:
   push:
     branches:
     - master
+
+permissions:
+  checks: write
+  contents: read    
     
 jobs:
   build_and_test:
