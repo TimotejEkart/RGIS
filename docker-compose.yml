@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: rgisvaja6:latest
+    image: timotejekart/rgisvaja6:latest
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__DefaultConnection: "Server=db,1433;Database=Izleti;User=sa;Password=YourPassword;"
