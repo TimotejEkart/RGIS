@@ -1,0 +1,21 @@
+﻿@page
+@model HotelSelectionModel
+@{
+    ViewData["Title"] = "Izbira hotela";
+}
+
+<h2>IZBERI HOTEL</h2>
+
+<form method="post" asp-page-handler="OnPost">
+    <div class="form-group">
+        <label for="hotelSelect">Hoteli:</label>
+        <select class="form-control" id="hotelSelect" name="HotelId">
+            @foreach (var hotel in Model.Hotels)
+            {
+                    <option value="@hotel.HoteliId">@hotel.Ime</option>
+            }
+        </select>
+    </div>
+    <input type="hidden" name="TripId" value="@Model.TripId" />
+    <button type="submit" class="btn btn-primary">Izberi</button>
+</form>
