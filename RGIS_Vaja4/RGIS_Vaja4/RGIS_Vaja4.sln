@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGIS_Vaja4", "RGIS_Vaja4.csproj", "{81D00452-15C9-47F0-89B9-021D0F222CAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81D00452-15C9-47F0-89B9-021D0F222CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81D00452-15C9-47F0-89B9-021D0F222CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81D00452-15C9-47F0-89B9-021D0F222CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81D00452-15C9-47F0-89B9-021D0F222CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {189762C8-61F1-44FA-9D7C-E04D71503AF1}
+	EndGlobalSection
+EndGlobal
