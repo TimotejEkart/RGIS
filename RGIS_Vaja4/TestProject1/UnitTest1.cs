@@ -42,7 +42,7 @@ namespace TestProject1
 
             string rezultat = hotel.VrniCenoZEnoto();
 
-            Assert.AreEqual("Cena: 100 € na enoto", rezultat);
+            Assert.AreEqual("Cena: 100 na enoto", rezultat);
         }
     }
     [TestClass]
@@ -78,7 +78,7 @@ namespace TestProject1
 
             string rezultat = potovanje.PridobiPodrobneInformacije();
 
-            Assert.AreEqual("Potovanje 1: Pariz, Cena: 500 €, Trajanje: 7 dni, Datum: " + potovanje.Datum.ToString("dd.MM.yyyy") + ", Status: na voljo, Ocene: 4,5", rezultat);
+            Assert.AreEqual("Potovanje 1: Pariz, Cena: 500, Trajanje: 7 dni, Datum: " + potovanje.Datum.ToString("dd.MM.yyyy") + ", Status: na voljo, Ocene: 4,5", rezultat);
         }
 
         [TestMethod]
