@@ -163,7 +163,21 @@ namespace RGIS_Vaja4.Pages
 		public string Ime { get; set; }
 		public string Kraj { get; set; }
 		public int Cena { get; set; }
-	}
+        public bool VeljavnostHotela()
+        {
+            return HoteliId > 0;
+        }
+
+        public string VrniHotel()
+        {
+            return $"{Ime} v kraju {Kraj}";
+        }
+
+        public string VrniCenoZEnoto()
+        {
+            return $"Cena: {Cena} € na enoto";
+        }
+    }
 
 	public class Potovanje
 	{
@@ -175,6 +189,31 @@ namespace RGIS_Vaja4.Pages
 		public string Opis { get; set; }
 		public double Ocene { get; set; }
 		public bool Rezervirano { get; set; }
+        public bool VeljavnostPotovanja()
+        {
+            return !Rezervirano && Datum.Date >= DateTime.Now.Date;
+        }
+
+        public string PridobiPodrobneInformacije()
+        {
+            string statusRezervacije = Rezervirano ? "rezervirano" : "na voljo";
+            string datumString = Datum.ToString("dd.MM.yyyy");
+            string ocenaString = Ocene > 0 ? Ocene.ToString("N1") : "Brez ocen";
+
+            return $"Potovanje {PotovanjeId}: {Kraj}, Cena: {Cena} €, Trajanje: {Trajanje} dni, Datum: {datumString}, Status: {statusRezervacije}, Ocene: {ocenaString}";
+        }
+
+        public void DodajOceno(double novaOcena)
+        {
+            if (novaOcena >= 1.0 && novaOcena <= 5.0)
+            {
+                Ocene = (Ocene + novaOcena) / 2;
+            }
+            else
+            {
+                throw new ArgumentException("Ocena mora biti med 1.0 in 5.0.");
+            }
+        }
     }
 	public class Ponudnik
 	{
@@ -186,12 +225,27 @@ namespace RGIS_Vaja4.Pages
 		public int Starost { get; set; }
 		public int LetoRojstva { get; set; }
 		public string Naslov { get; set; }
-	}
+
+        public bool VerodostojnostPonudnika()
+        {
+            return Verodostojnost && Starost >= 18;
+        }
+
+        public string VrniPolnoImeInKraj()
+        {
+            return $"{Ime} {Priimek} iz kraja {Kraj}";
+        }
+
+        public int IzracunajStarost()
+        {
+            int trenutnoLeto = DateTime.Now.Year;
+            return trenutnoLeto - LetoRojstva;
+        }
+    }
 	public class Odgovori
 	{
-        internal int odgovorId;
+        public int odgovorId;
 
-        public int OdgovoriId { get; set; }
 		public int potovanjeId { get; set; }
 		public string Odgovor1 { get; set; }
 		public string Odgovor2 { get; set; }
@@ -208,32 +262,131 @@ namespace RGIS_Vaja4.Pages
 		public string Odgovor13 { get; set; }
 		public string Odgovor14 { get; set; }
 		public string Odgovor15 { get; set; }
-	}
+
+		public bool VeljavnostOdgovorov()
+		{
+			return odgovorId > 0;
+		}
+
+        public int SteviloNepraznihOdgovorov()
+        {
+            int steviloNepraznih = 0;
+
+            foreach (var property in typeof(Odgovori).GetProperties())
+            {
+                if (property.PropertyType == typeof(string))
+                {
+                    var value = (string)property.GetValue(this);
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        steviloNepraznih++;
+                    }
+                }
+            }
+
+            return steviloNepraznih;
+        }
+
+        public bool AliOdgovorObstaja(string iskaniOdgovor)
+        {
+            foreach (var property in typeof(Odgovori).GetProperties())
+            {
+                if (property.PropertyType == typeof(string))
+                {
+                    var value = (string)property.GetValue(this);
+                    if (value != null && value.Equals(iskaniOdgovor))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }
 	public class Administrator
 	{
 		public int administratorId { get; set; }
 		public string Ime { get; set; }
 		public string Priimek { get; set; }
 		public int SteviloOdstranjenih {  get; set; }
-	}
+        public bool VeljavnostAdministratorja()
+        {
+            return administratorId > 0;
+        }
+
+        public string VrniAdministratorja()
+        {
+            return $"{Ime} {Priimek}";
+        }
+
+        public void PovecajSteviloOdstranjenih()
+        {
+            SteviloOdstranjenih++;
+        }
+    }
 	public class Koledar
 	{
 		public int koledarId { get; set; }
 		public DateTime datum { get; set; }
 		public DateTime datumKonec { get; set; }
-	}
+
+        public bool VeljavnostID()
+        {
+            return koledarId > 0;
+        }
+
+        public bool VeljavnostKoncaDatuma()
+        {
+            return datumKonec > datum;
+        }
+
+        public bool VeljavnostDatuma()
+        {
+            return datum > DateTime.Now;
+        }
+    }
 	public class SistemPlacilo
 	{
 		public int sistemPlaciloId { get; set; }
 		public double Znesek { get; set; }
 		public DateTime DatumPlacila { get; set; }
-	}
+        public bool VeljavnostPlacila()
+        {
+            return sistemPlaciloId > 0;
+        }
+
+        public bool ZnesekPozitiven()
+        {
+            return Znesek > 0;
+        }
+
+        public bool VeljavnostDatumPlacila()
+        {
+            return DatumPlacila.Date == DateTime.Now.Date;
+        }
+    }
 	public class Rezervacija
 	{
 		public int rezervacijaId { get; set; }
 		public bool Rezervirano { get; set; }
 		public DateTime DatumRezervacije { get; set; }
-	}
+
+        public bool VeljavnostRezervacije()
+        {
+            return rezervacijaId > 0;
+        }
+
+        public bool AliJeRezervirano()
+        {
+            return Rezervirano;
+        }
+
+        public bool VeljavnostDatumaRezervacije()
+        {
+            return DatumRezervacije.Date == DateTime.Now.Date;
+        }
+    }
 	public class Uporabnik
 	{
 		public int uporabnikId { get; set; }
@@ -241,10 +394,38 @@ namespace RGIS_Vaja4.Pages
 		public string Priimek { get; set; }
 		public string Kraj { get; set; }
 		public int Starost { get; set; }
-	}
+        public string VrniPolnoIme()
+        {
+            return $"{Ime} {Priimek}";
+        }
+
+        public bool JePolnoleten()
+        {
+            return Starost >= 18;
+        }
+
+        public void PosodobiStarost(int novaStarost)
+        {
+            Starost = novaStarost;
+        }
+    }
 	public class Evidenca
 	{
 		public int evidencaId { get; set; }
 		public DateTime DatumVnosa { get; set; }
-	}
+        public string VrniOblikovanDatum()
+        {
+            return DatumVnosa.ToString("dd.MM.yyyy");
+        }
+
+        public void PovecajEvidencaId()
+        {
+            evidencaId++;
+        }
+
+        public int DobiLetoVnosa()
+        {
+            return DatumVnosa.Year;
+        }
+    }
 }

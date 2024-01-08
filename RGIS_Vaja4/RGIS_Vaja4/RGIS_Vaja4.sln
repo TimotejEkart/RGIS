@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34018.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RGIS_Vaja4", "RGIS_Vaja4.csproj", "{81D00452-15C9-47F0-89B9-021D0F222CAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "..\TestProject1\TestProject1.csproj", "{EC5E408B-9F15-411F-8C17-ACBD77342B5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{81D00452-15C9-47F0-89B9-021D0F222CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81D00452-15C9-47F0-89B9-021D0F222CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81D00452-15C9-47F0-89B9-021D0F222CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5E408B-9F15-411F-8C17-ACBD77342B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5E408B-9F15-411F-8C17-ACBD77342B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5E408B-9F15-411F-8C17-ACBD77342B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5E408B-9F15-411F-8C17-ACBD77342B5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
