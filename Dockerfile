@@ -12,6 +12,7 @@ RUN dotnet restore "RGIS_Vaja4.csproj"
 COPY ["RGIS_Vaja4/RGIS_Vaja4/", "./"]
 
 COPY ["Izleti.mdf", "./"]
+COPY ["Izleti_log_.ldf", "./"]
 
 RUN dotnet build "RGIS_Vaja4.csproj" -c Release -o /app/build
 
@@ -23,5 +24,6 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 COPY ["Izleti.mdf", "./"]
+COPY ["Izleti_log_.ldf", "./"]
 
 ENTRYPOINT ["dotnet", "RGIS_Vaja4.dll"]
