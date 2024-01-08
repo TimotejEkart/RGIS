@@ -22,17 +22,17 @@ WORKDIR /src
 
 # kopiranje datotek v delovni direktorij
 
-COPY ["RGIS_Vaja4/RGIS_Vaja4.csproj", "RGIS_Vaja4/"]
+COPY ["RGIS_Vaja4/RGIS_Vaja4/RGIS_Vaja4.csproj", "RGIS_Vaja4/RGIS_Vaja4/"]
 
 
 
 # zagon ukaza za obnovo vseh odvisnosti
 
-RUN dotnet restore "RGIS_Vaja4/RGIS_Vaja4.csproj"
+RUN dotnet restore "RGIS_Vaja4/RGIS_Vaja4/RGIS_Vaja4.csproj"
 
 COPY . .
 
-WORKDIR "/src/RGIS_Vaja4"
+WORKDIR "/src/RGIS_Vaja4/RGIS_Vaja4"
 
 # zagon ukaza za izgradnjo projekta	
 
