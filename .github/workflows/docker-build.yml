@@ -33,7 +33,7 @@ jobs:
       if: always()
       with:
         name: 'Unit Tests'
-        path: '**/testresults.trx'
+        path: '**/TestResults/test-results.trx'
         reporter: dotnet-trx
      
     - name: Login to Docker Hub
