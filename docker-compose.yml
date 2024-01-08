@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    image: timotejekart/rgis:latest
+    depends_on:
+      - db
+    ports:
+      - "7017:80"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=Izleti;User=sa;Password=Rgis;
+
+  db:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      SA_PASSWORD: "Rgis"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - izleti-db:/var/opt/mssql
+
+volumes:
+  izleti-db:
