@@ -23,7 +23,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-COPY ["Izleti.mdf", "./"]
-COPY ["Izleti_log_.ldf", "./"]
-
 ENTRYPOINT ["dotnet", "RGIS_Vaja4.dll"]
