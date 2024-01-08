@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    image: your-dotnet-image:latest
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=db,1433;Database=Izleti;User=sa;Password=YourPassword;"
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      SA_PASSWORD: "YourPassword"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./:/var/opt/mssql/data
+
+volumes:
+  db-data:
