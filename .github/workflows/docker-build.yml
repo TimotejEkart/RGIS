@@ -2,49 +2,56 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ master ]
-
+    branches:
+    - master
+    
 jobs:
-  build-and-test:
+  build_and_test:
     runs-on: ubuntu-latest
+  
+    env:
+      BUILD_CONFIG: 'Release'
+      SOLUTION: 'RGIS_Vaja4/RGIS_Vaja4/RGIS_Vaja4.sln'
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '6.0' 
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0' 
 
-      - name: Restore dependencies
-        run: dotnet restore ./RGIS_Vaja4/RGIS_Vaja4.sln  # Adjust the path to your solution file
+    - name: Restore dependencies
+      run: dotnet restore $SOLUTION
 
-      - name: Build the project
-        run: dotnet build ./RGIS_Vaja4/RGIS_Vaja4.sln --configuration Release
+    - name: Build
+      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG
+      
+    - name: Test
+      run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
+      
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: DotNET Tests
+        path: "**/test-results.trx"                            
+        reporter: dotnet-trx
+        fail-on-error: true
+     
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Run tests
-        run: dotnet test ./RGIS_Vaja4/TestProject1 --logger "trx;LogFileName=test_results.trx"  # Adjust this path to where your test project is
-
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: Test Results
-          path: "**/test_results.trx"
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            timotejekart/rgisvaja6:latest
-            timotejekart/rgis:${{ github.sha }}
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          timotejekart/rgisvaja6:latest
+          timotejekart/rgis:${{ github.sha }}
