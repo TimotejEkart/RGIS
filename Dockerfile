@@ -7,18 +7,14 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
 COPY ["RGIS_Vaja4/RGIS_Vaja4/RGIS_Vaja4.csproj", "./"]
-COPY ["RGIS_Vaja4/TestProject1/TestProject1.csproj", "./"]
 RUN dotnet restore "RGIS_Vaja4.csproj"
-RUN dotnet restore "TestProject1.csproj"
 
 COPY ["RGIS_Vaja4/RGIS_Vaja4/", "./"]
-COPY ["RGIS_Vaja4/TestProject1/", "./"]
 
 COPY ["Izleti.mdf", "./"]
 COPY ["Izleti_log_.ldf", "./"]
 
 RUN dotnet build "RGIS_Vaja4.csproj" -c Release -o /app/build
-RUN dotnet build "TestProject1.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "RGIS_Vaja4.csproj" -c Release -o /app/publish /p:UseAppHost=false

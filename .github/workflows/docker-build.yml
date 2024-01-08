@@ -21,21 +21,20 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '6.0' 
+        
+    - name: Build the test project
+      run: dotnet build "RGIS_Vaja4/TestProject/TestProject1.csproj" -c $BUILD_CONFIG
 
-    - name: Build
-      run: dotnet build $SOLUTION --configuration $BUILD_CONFIG
-      
-    - name: Test
-      run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;LogFileName=./test-results.trx" || true
-      
-    - name: Test Report
+    - name: Run tests
+      run: dotnet test "RGIS_Vaja4/TestProject/TestProject1.csproj" --logger "trx;LogFileName=test_results.trx"
+
+    - name: Publish test results
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        name: DotNET Tests
-        path: "./test-results.trx"                            
-        reporter: dotnet-trx
-        fail-on-error: true
+        name: 'Unit Tests'
+        path: '**/*.trx'
+        reporter: 'github-check' 
      
     - name: Login to Docker Hub
       uses: docker/login-action@v1
