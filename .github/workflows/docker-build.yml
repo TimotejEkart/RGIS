@@ -22,9 +22,6 @@ jobs:
       with:
         dotnet-version: '6.0' 
 
-    - name: Restore dependencies
-      run: dotnet restore $SOLUTION
-
     - name: Build
       run: dotnet build $SOLUTION --configuration $BUILD_CONFIG
       
