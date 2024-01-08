@@ -175,7 +175,7 @@ namespace RGIS_Vaja4.Pages
 
         public string VrniCenoZEnoto()
         {
-            return $"Cena: {Cena} € na enoto";
+            return $"Cena: {Cena} na enoto";
         }
     }
 
@@ -200,7 +200,7 @@ namespace RGIS_Vaja4.Pages
             string datumString = Datum.ToString("dd.MM.yyyy");
             string ocenaString = Ocene > 0 ? Ocene.ToString("N1") : "Brez ocen";
 
-            return $"Potovanje {PotovanjeId}: {Kraj}, Cena: {Cena} €, Trajanje: {Trajanje} dni, Datum: {datumString}, Status: {statusRezervacije}, Ocene: {ocenaString}";
+            return $"Potovanje {PotovanjeId}: {Kraj}, Cena: {Cena}, Trajanje: {Trajanje} dni, Datum: {datumString}, Status: {statusRezervacije}, Ocene: {ocenaString}";
         }
 
         public void DodajOceno(double novaOcena)
