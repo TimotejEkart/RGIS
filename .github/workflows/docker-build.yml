@@ -28,5 +28,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            timotejekart/rgis:latest
+            timotejekart/rgisvaja6:latest
             timotejekart/rgis:${{ github.sha }}

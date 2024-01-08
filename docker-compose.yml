@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    image: timotejekart/rgis:latest
+    image: timotejekart/rgisvaja6:latest
     depends_on:
       - db
     ports:
